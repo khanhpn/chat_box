@@ -1,0 +1,29 @@
+<%= form_with(model: apprenticeship, local: true) do |form| %>
+  <% if apprenticeship.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(apprenticeship.errors.count, "error") %> prohibited this apprenticeship from being saved:</h2>
+
+      <ul>
+      <% apprenticeship.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :jedi_id %>
+    <%= form.number_field :jedi_id, id: :apprenticeship_jedi_id, class: "form-control" %>
+    <%= form.select :jedi_id, Jedi.all.collect { |p| [ p.name, p.id ] } %>
+  </div>
+
+  <div class="field">
+    <%= form.label :padawan_id %>
+    <%= form.number_field :padawan_id, id: :apprenticeship_padawan_id, class: "form-control" %>
+    <%= form.select :padawan_id, Padawan.all.collect { |p| [ p.name, p.id ] } %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
